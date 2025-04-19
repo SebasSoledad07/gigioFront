@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { inter, cabinet } from "./fonts";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/context/CartContext";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gigio - Pijamas de Calidad",
-  description: "Tienda online de pijamas de alta calidad. Descubre nuestra colección de pijamas cómodos y elegantes.",
-  keywords: "pijamas, ropa de dormir, moda, comodidad, calidad",
-  authors: [{ name: "Gigio" }],
-  openGraph: {
-    title: "Gigio - Pijamas de Calidad",
-    description: "Tienda online de pijamas de alta calidad. Descubre nuestra colección de pijamas cómodos y elegantes.",
-    type: "website",
-    locale: "es_ES",
-  },
+  title: "Pijamas Cómodos",
+  description: "Descubre nuestra colección de pijamas de alta calidad",
 };
 
 export default function RootLayout({
@@ -21,9 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${inter.variable} ${cabinet.variable}`}>
-      <body className={`${inter.className} antialiased`}>
-        {children}
+    <html lang="es">
+      <body className={inter.className} suppressHydrationWarning>
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
